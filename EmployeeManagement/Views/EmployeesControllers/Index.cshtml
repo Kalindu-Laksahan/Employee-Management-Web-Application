@@ -1,0 +1,33 @@
+﻿@model List<EmployeeManagement.Models.Domain.Employee>
+
+@{
+}
+
+<h1>View Employees</h1>
+</br></br></br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Employee Name</th>
+            <th>Employee Email</th>
+            <th>Employee Salary</th>
+            <th>Employee Date of Birth</th>
+            <th>Employee Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>@employee.Salary</td>
+                <td>@employee.DateofBirth.ToString("dd-MM-yy")</td>
+                <td>@employee.Department</td>
+            </tr>
+        }
+    </tbody>
+</table>
