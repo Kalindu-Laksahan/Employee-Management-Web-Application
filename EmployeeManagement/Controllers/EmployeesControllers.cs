@@ -90,7 +90,16 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(UpdateEmpViewModel model)
         {
+            var employee = await mvcDbContext.Employees.FindAsync(model.Id);
 
+            if (employee != null)
+            {
+                mvcDbContext.Employees.Remove(employee);
+                await mvcDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
 
 
