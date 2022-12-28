@@ -15,6 +15,7 @@
             <th>Employee Salary</th>
             <th>Employee Date of Birth</th>
             <th>Employee Department</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@
                 <td>@employee.Salary</td>
                 <td>@employee.DateofBirth.ToString("dd-MM-yy")</td>
                 <td>@employee.Department</td>
+                <td><a href="EmployeesControllers/View/@employee.Id">View</a></td>
             </tr>
         }
     </tbody>

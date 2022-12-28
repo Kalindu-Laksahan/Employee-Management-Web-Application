@@ -48,6 +48,51 @@ namespace EmployeeManagement.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> View(Guid id)
+        {
+            var employee = await mvcDbContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
+            if (employee != null)
+            {
+                var viewModel = new UpdateEmpViewModel()
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Email = employee.Email,
+                    Salary = employee.Salary,
+                    DateofBirth = employee.DateofBirth,
+                    Department = employee.Department
+                };
+                return await Task.Run(() => View("View",viewModel));
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public  async Task<IActionResult> View(UpdateEmpViewModel model)
+        {
+            var employee = await mvcDbContext.Employees.FindAsync(model.Id);
+
+            if(employee != null)
+            {
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.Salary = model.Salary;
+                employee.DateofBirth = model.DateofBirth;
+                employee.Department = model.Department;
+
+                await mvcDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UpdateEmpViewModel model)
+        {
+
+        }
+
 
 
     }
